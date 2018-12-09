@@ -13,6 +13,7 @@ print("Logged into r/{}".format(subreddit.title))
 timeZone = 'US/Eastern' # Google "pytz timezones" for other options
 dummydate = datetime.datetime.now(tz=pytz.timezone(timeZone)) # This is needed for the .replace(tzinfo=dummydate.tzinfo) method
 sleepTime = 120   #Time (in seconds) the program will wait to loop again
+gracePeriod = 86400 #Period (in s) just after a schedule time where it displays a different message. 0 = no grace period
 
 try:
 	with open("episodeSchedule.txt","r") as f:
@@ -36,46 +37,47 @@ while True:
 	oldSidebar = subreddit.mod.settings()["description"] # Requests the current sidebar
 	sidebarSectionB = oldSidebar.split("___",1)[1] # Saves the sidebar part that doesn't change as a string
 
-	currentDate = datetime.datetime.now(tz=pytz.timezone(timeZone)) # Gets current time on chosen timezone
+	currentTime = datetime.datetime.now(tz=pytz.timezone(timeZone)) # Gets current time on chosen timezone
 
 	# Crafts a message log for the console
 	m1 = "Updating Sidebar - {} time: ".format(timeZone)
-	m2 = currentDate.strftime('%H:%M:%S')
+	m2 = currentTime.strftime('%H:%M:%S')
 	m3 = " Local time: {}".format(datetime.datetime.now().strftime('%H:%M:%S'))
 	m4 = " - Next update programed in {} sec.".format(sleepTime)
 	print(m1+m2+m3+m4)
 
-	remainingTime = []
-	pastEpisodes = []
+	futureDates = []
+	pastDates = []
 	for date in scheduleDates:
 		# print("Dates;",date)
-		dlt = date - currentDate
+		dlt = date - currentTime
 		totalSec = dlt.total_seconds()
 		if (totalSec >= 0): #This makes sure that it only takes into account future dates
-			remainingTime.append(dlt)
-			# print("Remaining Dates:",date - currentDate)
+			futureDates.append(dlt)
+			# print("Remaining Dates:",date - currentTime)
 		else:
-			pastEpisodes.append(abs(totalSec)) #This adds already past dates to a list. This is for the grace period
+			pastDates.append(abs(totalSec)) #This adds already past dates to a list. This is for the grace period
 
-	if (remainingTime == []): # This is where there're no future dates
+	if (futureDates == []):
 		newSidebar = "Next episode air date: To be announced  \n___"+sidebarSectionB
 		subreddit.mod.update(description=newSidebar)
 		break
 
-	elif(min(pastEpisodes) < 86400): # Grace Period: If an episode has aired in the las 42h it will show this message. 
+	elif(min(pastDates) < gracePeriod): 
+		# Grace Period: If a scheduled date has happened inside the last <gracePeriod> it will show this message. 
 		newSidebar = "The new episode is out now!  \n___"+sidebarSectionB
 		subreddit.mod.update(description=newSidebar)
-		print("Last episode aired in the last {} seconds ({} hours).".format(min(pastEpisodes),int((min(pastEpisodes) - min(pastEpisodes)%3600)/3600)))
+		print("Last episode aired in the last {} seconds ({} hours).".format(min(pastDates),int((min(pastDates) - min(pastDates)%3600)/3600)))
 		print("Sleeping for 20000 seconds")
 		sleep(20000)
 
 	else: # General most common case. A schedule past date is beyond the grace period and there are still dates in the schedule
-		delta = min(remainingTime)  # This takes the date closest to the current time
+		delta = min(futureDates)  # This takes the date closest to the current time
 		days = delta.days
 		hours = int((delta.seconds - delta.seconds%3600)/3600)
 		minutes = int((delta.seconds%3600)/60)
 
-		"""What follows is a rule to display the countdown in a simple way. 
+		"""What follows is logic to display the countdown in a simple very readable way. 
 			It is equivalent, but displays a better message that this 1 line of code:
 		countdown = "**{0}** day{1}, **{2}** hour{3} and **{4}** minute{5}".format(delta.days, "s"*(delta.days != 1), hours, "s"*(hours != 1),  minutes, "s"*(minutes != 1))
 			"""
