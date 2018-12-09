@@ -12,17 +12,21 @@ print("Logged into r/{}".format(subreddit.title))
 
 timeZone = 'US/Eastern' # Google "pytz timezones" for other options
 dummydate = datetime.datetime.now(tz=pytz.timezone(timeZone)) # This is needed for the .replace(tzinfo=dummydate.tzinfo) method
-sleepTime = 120
+sleepTime = 120   #Time (in seconds) the program will wait to loop again
 
 try:
 	with open("episodeSchedule.txt","r") as f:
-		# YYYY - MM - DD - TT:TT AM
-		f.readline() # This is so it ignores the first line of the file which talks about the format
+		# Schedule format in file:        YYYY - MM - DD - TT:TT AM  
+		""" NOTE: The variable 'timeZone' is the timezone of the dates in this file.
+		        Change variable if needed and keep dates in the file on the same timezone."""
+		f.readline() # This is so it ignores the first line of the file which reminds about the format
 		temp = f.readlines()
-		scheduleDates = []
+		scheduleDates = [] # List that will store all dates from file
 		for st in temp:
-			parsed_date = datetime.datetime.strptime(st.rstrip(),'%Y - %m - %d - %I:%M %p') # This creates a naive date with the parsed info
-			scheduleDates.append(parsed_date.replace(tzinfo=dummydate.tzinfo)) # This turns that naive date into an aware one 
+			# (1) : Creates a naive date with the parsed info from episodeSchedule.txt
+			# (2) : Turns naive date into an aware (with timezone) one 
+			parsed_date = datetime.datetime.strptime(st.rstrip(),'%Y - %m - %d - %I:%M %p') # (1)
+			scheduleDates.append(parsed_date.replace(tzinfo=dummydate.tzinfo)) # (2)
 		del temp #This deletes the temporal list to free a small amount of memory	
 except FileNotFoundError:
 	print("Error. File 'episodeSchedule.txt' not found.")
@@ -30,15 +34,15 @@ except FileNotFoundError:
 
 while True:
 	oldSidebar = subreddit.mod.settings()["description"] # Requests the current sidebar
-	sidebarSectionB = oldSidebar.split("___",1)[1] # Splits the sidebar into the part that will be changed and the other, and saves the other
-	# print(sidebarSectionB)
+	sidebarSectionB = oldSidebar.split("___",1)[1] # Saves the sidebar part that doesn't change as a string
 
-	currentDate = datetime.datetime.now(tz=pytz.timezone(timeZone)) #Gets current time on chosen timezone
+	currentDate = datetime.datetime.now(tz=pytz.timezone(timeZone)) # Gets current time on chosen timezone
 
+	# Crafts a message log for the console
 	m1 = "Updating Sidebar - {} time: ".format(timeZone)
 	m2 = currentDate.strftime('%H:%M:%S')
 	m3 = " Local time: {}".format(datetime.datetime.now().strftime('%H:%M:%S'))
-	m4 = "  - Next update programed in {} sec.".format(sleepTime)
+	m4 = " - Next update programed in {} sec.".format(sleepTime)
 	print(m1+m2+m3+m4)
 
 	remainingTime = []
@@ -51,28 +55,30 @@ while True:
 			remainingTime.append(dlt)
 			# print("Remaining Dates:",date - currentDate)
 		else:
-			pastEpisodes.append(abs(totalSec))
+			pastEpisodes.append(abs(totalSec)) #This adds already past dates to a list. This is for the grace period
 
-	if (remainingTime == []):
+	if (remainingTime == []): # This is where there're no future dates
 		newSidebar = "Next episode air date: To be announced  \n___"+sidebarSectionB
 		subreddit.mod.update(description=newSidebar)
 		break
 
-	elif(min(pastEpisodes) < 86400): # If an episode has aired in the las 42h it will show this message
+	elif(min(pastEpisodes) < 86400): # Grace Period: If an episode has aired in the las 42h it will show this message. 
 		newSidebar = "The new episode is out now!  \n___"+sidebarSectionB
 		subreddit.mod.update(description=newSidebar)
 		print("Last episode aired in the last {} seconds ({} hours).".format(min(pastEpisodes),int((min(pastEpisodes) - min(pastEpisodes)%3600)/3600)))
-		print("Sleeping for 500 seconds")
-		sleep(500)
+		print("Sleeping for 20000 seconds")
+		sleep(20000)
 
-	else:
-		delta = min(remainingTime)
+	else: # General most common case. A schedule past date is beyond the grace period and there are still dates in the schedule
+		delta = min(remainingTime)  # This takes the date closest to the current time
 		days = delta.days
 		hours = int((delta.seconds - delta.seconds%3600)/3600)
 		minutes = int((delta.seconds%3600)/60)
-		# countdown = "**{0}** day{1}, **{2}** hour{3} and **{4}** minute{5}".format(delta.days, "s"*(delta.days != 1), hours, "s"*(hours != 1),  minutes, "s"*(minutes != 1))
 
-		######## This replaces the last line ############
+		"""What follows is a rule to display the countdown in a simple way. 
+			It is equivalent, but displays a better message that this 1 line of code:
+		countdown = "**{0}** day{1}, **{2}** hour{3} and **{4}** minute{5}".format(delta.days, "s"*(delta.days != 1), hours, "s"*(hours != 1),  minutes, "s"*(minutes != 1))
+			"""
 		if (days > 1):
 			dayString = "**{}** days".format(delta.days)
 		elif (days == 0):
@@ -106,7 +112,7 @@ while True:
 			raise TypeError
 
 		countdown = dayString+hourString+minuteString
-		######################
+		"""###"""
 
 		# print(countdown)
 		newSidebar = "Next episode airs in:  \n"+countdown+"\n___"+sidebarSectionB
