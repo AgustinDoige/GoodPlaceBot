@@ -8,12 +8,13 @@ from time import sleep
 
 reddit = praw.Reddit('bot1')
 # subreddit = reddit.subreddit('TheGoodSandbox')
-subreddit = reddit.subreddit('TheGoodPlace')
+subreddit = reddit.subreddit('TheGoodSandbox')
 
 print("Logged into r/{}".format(subreddit.title))
 
 timeZone = 'US/Eastern' # Google "pytz timezones" for other options
 dummydate = datetime.datetime.now(tz=pytz.timezone(timeZone)) # This is needed for the .replace(tzinfo=dummydate.tzinfo) method
+sleepTime = 120
 
 try:
 	with open("episodeSchedule.txt","r") as f:
@@ -34,9 +35,13 @@ while True:
 	sidebarSectionB = oldSidebar.split("___",1)[1] # Splits the sidebar into the part that will be changed and the other, and saves the other
 	# print(sidebarSectionB)
 
-	currentDate = datetime.datetime.now(tz=pytz.timezone(timeZone)) #Gets current time
-	# print("Current time in timezone", timeZone,":",currentDate)
-	print("Updating Sidebar - Current time:",currentDate.strftime('%H:%M:%S'), " Local time:",datetime.datetime.now().strftime('%H:%M:%S'))
+	currentDate = datetime.datetime.now(tz=pytz.timezone(timeZone)) #Gets current time on chosen timezone
+
+	m1 = "Updating Sidebar - {} time: ".format(timeZone)
+	m2 = currentDate.strftime('%H:%M:%S')
+	m3 = " Local time: {}".format(datetime.datetime.now().strftime('%H:%M:%S'))
+	m4 = "  - Next update programed in {} sec.".format(sleepTime)
+	print(m1+m2+m3+m4)
 
 	remainingTime = []
 	pastEpisodes = []
@@ -109,4 +114,4 @@ while True:
 		newSidebar = "Next episode airs in:  \n"+countdown+"\n___"+sidebarSectionB
 		# print(newSidebar)
 		subreddit.mod.update(description=newSidebar)
-		sleep(120)
+		sleep(sleepTime)
