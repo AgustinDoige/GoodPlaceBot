@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "maxId": 0,
+    "format": "{'name': 'dummyRule','shadow':False,'repply':None,'hardrule':True,'termlist':['shirt','fork','forking','shirtballs','ashole'],'reward':10}"
+  },
+  "rules": [
+    {
+      "name": "dummyRule",
+      "shadow": true,
+      "reply": null,
+      "hardrule": true,
+      "termlist": [
+        "shirt",
+        "fork",
+        "forking",
+        "shirtballs"
+      ],
+      "reward": 10
+    }
+  ]
+}
