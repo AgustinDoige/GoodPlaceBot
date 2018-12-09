@@ -1,0 +1,4 @@
+This file should have the points (positive or negative) and then a ": " and then 
+the exact phrase that will award those points
+-10: i hate tests
++15: i love the good place

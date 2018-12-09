@@ -1,0 +1,20 @@
+v001:
+
+- Added automated response
+- Added hardRules
+- Added AccountantLogs
+- Added Userlogs
+
+TODO: 
+[UNSOLVED] Make 1 response per comment and not 1 response per good/bad action
+
+
+v002: 
+
+- Changed UserLogs from .txt to json
+- Added name, id, and history to UserLogs
+- Added softRules
+
+TODO: 
+[UNSOLVED] Make it so the bot also takes into consideration the post and selftext
+[UNSOLVED] Add datetime to AccountantLogs
