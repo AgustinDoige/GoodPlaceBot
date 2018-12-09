@@ -18,3 +18,8 @@ v002:
 TODO: 
 [UNSOLVED] Make it so the bot also takes into consideration the post and selftext
 [UNSOLVED] Add datetime to AccountantLogs
+
+
+v003:
+
+- Added SidebarCountdown
