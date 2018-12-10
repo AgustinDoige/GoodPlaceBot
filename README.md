@@ -4,16 +4,16 @@
 A Python Reddit Bot for modding the subreddit TheGoodPlace  
 
 
-# # Description:  
+## Description:  
 
 This is a bot written in Python 3 for reddit, specifically the subreddit r/TheGoodPlace. It uses the module reddit's API wrapper [**PRAW**](https://praw.readthedocs.io)  
 
 It performs several actions in the sub and requires mod privileges.  
 
 
-# # Functions:  
+## Functions:  
 
-# # # *Updating Sidebar*  
+### *Updating Sidebar*  
 
 Module: **sidebarCountdown.py**  
 
@@ -21,7 +21,7 @@ With a schedule of release of episodes, it updates the sidebar of the subreddit 
 
 It has an aware date with customizable timezone. It uses the **datetime** and **pytz** modules  
 
-# # # *Point System*  
+### *Point System*  
 
 Module: **RRRRRRRR.py**  
 
