@@ -4,3 +4,5 @@ formula1*
 UsefulLinks.txt
 Bot_patchnotes.txt
 __pycache__*
+quicktesting.py
+*ignore*
