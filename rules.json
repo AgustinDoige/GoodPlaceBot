@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "format": "'reward':<int>,'hardrule':<bool>,'reply':<str/None>,'modnotice':<bool>,'termlist':<list/matrix>"
+  },
+  "rules": {
+    "hardRuleExample": {
+      "reward": 10,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": false,
+      "termlist": [
+        "shirt",
+        "fork",
+        "forking",
+        "shirtballs",
+        "forked"
+      ]
+    },
+    "softRuleExample": {
+      "reward": 30,
+      "hardrule": false,
+      "reply": null,
+      "modnotice": false,
+      "termlist": [
+        ">!",
+        "!<"
+      ]
+    },
+    "hardMixExample": {
+      "reward": -15,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": false,
+      "termlist": [
+        [
+          "bad",
+          "terrible",
+          "awful",
+          "dumb",
+          "stupid"
+        ],
+        [
+          " accent",
+          " accents"
+        ]
+      ]
+    },
+    "softMixExample": {
+      "reward": -20,
+      "hardrule": false,
+      "reply": null,
+      "modnotice": false,
+      "termlist": [
+        [
+          "this",
+          "that"
+        ],
+        [
+          "example",
+          "examples"
+        ]
+      ]
+    }
+  }
+}
