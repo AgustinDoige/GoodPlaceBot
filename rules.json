@@ -1,63 +1,58 @@
 {
   "meta": {
-    "format": "'reward':<int>,'hardrule':<bool>,'reply':<str/None>,'modnotice':<bool>,'termlist':<list/matrix>"
+    "format": "'reward':<int>,'hardrule':<bool>,'reply':<str/None>,'modnotice':<bool>,'termlist':<list/matrix>",
+    "Description": "Description in 'json rules' section of the README.md"
   },
   "rules": {
     "hardRuleExample": {
-      "reward": 10,
+      "reward": 0,
       "hardrule": true,
       "reply": null,
-      "modnotice": false,
+      "modnotice": null,
       "termlist": [
-        "shirt",
-        "fork",
-        "forking",
-        "shirtballs",
-        "forked"
+        "A",
+        "B"
       ]
     },
     "softRuleExample": {
-      "reward": 30,
+      "reward": 0,
       "hardrule": false,
       "reply": null,
-      "modnotice": false,
+      "modnotice": null,
       "termlist": [
-        ">!",
-        "!<"
+        "A",
+        "B"
       ]
     },
     "hardMixExample": {
-      "reward": -15,
+      "reward": 0,
       "hardrule": true,
       "reply": null,
-      "modnotice": false,
+      "modnotice": null,
       "termlist": [
         [
-          "bad",
-          "terrible",
-          "awful",
-          "dumb",
-          "stupid"
+          "A",
+          "B"
         ],
         [
-          " accent",
-          " accents"
+          "C",
+          "D"
         ]
       ]
     },
     "softMixExample": {
-      "reward": -20,
+      "reward": 0,
       "hardrule": false,
       "reply": null,
-      "modnotice": false,
+      "modnotice": null,
       "termlist": [
         [
-          "this",
-          "that"
+          "A",
+          "B"
         ],
         [
-          "example",
-          "examples"
+          "C",
+          "D"
         ]
       ]
     }

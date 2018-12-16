@@ -16,10 +16,10 @@ def rewriteRules(newDict):
 		json.dump(newDict,h,indent=2)
 
 def writeBasicFile():
-	hardRuleExample = {'reward':0,'hardrule':True,'reply':None,'modnotice':False,'termlist':['shirt','fork','forking','shirtballs','forked']}
-	softRuleExample = {'reward':0,'hardrule':False,'reply':None,'modnotice':False,'termlist':['>!','!<']}
-	hardMixExample  = {'reward':0,'hardrule':True,'reply':None,'modnotice':False,'termlist':[['bad','terrible','awful','dumb','stupid'],[' accent',' accents']]}
-	softMixExample  = {'reward':0,'hardrule':False,'reply':None,'modnotice':False,'termlist':[['this','that'],['example','examples']]}
+	hardRuleExample = {'reward':0,'hardrule':True,'reply':None,'modnotice':None,'termlist':['A','B']} # A OR B
+	softRuleExample = {'reward':0,'hardrule':False,'reply':None,'modnotice':None,'termlist':['A','B']} # A AND (after) B 
+	hardMixExample  = {'reward':0,'hardrule':True,'reply':None,'modnotice':None,'termlist':[['A','B'],['C','D']]} # (A OR B) JOIN (C OR D)
+	softMixExample  = {'reward':0,'hardrule':False,'reply':None,'modnotice':None,'termlist':[['A','B'],['C','D']]} # (A OR B) AND (after) (C OR D)
 
 	rulesDic = {}
 	rulesDic['meta'] = {}
@@ -35,6 +35,7 @@ def addRule(dic):
 
 
 writeBasicFile()
+
 
 # with open("rules.json","r") as f:
 # 	rulesDic = json.load(f)

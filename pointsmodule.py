@@ -2,6 +2,9 @@ import praw
 import json
 import datetime
 
+def getSentences():
+	pass
+
 def giveValue(string,ruleDic):
 	#dummyrule = {'name': "dummyRule",'shadow':False,'repply':None,'hardrule':True,'termlist':["shirt","fork","forking","shirtballs","ashole"],'reward':10}
 
