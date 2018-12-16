@@ -1,33 +1,34 @@
-TODO: 
+Patchnotes: 
 
-[UNSOLVED] Make it so the bot also takes into consideration the initial submission and selftext
-[UNSOLVED] Add datetime to AccountantLogs
-[UNSOLVED] Make 1 response per comment and not 1 response per good/bad action
-[UNSOLVED] Add a response to !tellmemyscore type request
+To do:
+[v004] Add “alertMod” message to rules. “None” for no alert
+[PENDING] Make it so the bot also takes into consideration the initial submission and selftext
+[PENDING] Add datetime to AccountantLogs
+[PENDING] Make 1 response per comment and not 1 response per good/bad action
+[PENDING] Add a response to !tellmemyscore type request
+[PENDING] Add the Top Ranks
+[PENDING] Make it so the bot updates flairs at the same time every week.
+[PENDING] Make it so the bot updates the sidebar weekly with the Top 10 and also updates and links the wiki with the rest.
+[PENDING] Good Place Flairs should be awarded to the top 322 users. 323 should be Mindy and the rest bad place.  
+[PENDING] The wiki should show this 322 from the good place and Mindy
 
-
-
-
+Versions:
 v001:
-
 - Added automated response
 - Added hardRules
 - Added AccountantLogs
 - Added Userlogs
 
 v002: 
-
 - Changed UserLogs from .txt to json
 - Added name, id, and history to UserLogs
 - Added softRules
 
 v003:
-
 - Added SidebarCountdown
 
 v004:
-
 - Added a main program that handles the different parts of the code
 - Moved from .txt plain text rules to a json dictionary to save the rules
 - Hardrules and softrules are now 1 set of rules
-- 
+- Now rules can be set to trigger a warning message to an mod, for behavior that needs a human decision. 
