@@ -13,8 +13,8 @@ def updateSidebar(subreddit,sleepTime):
 
 	try:
 		with open("episodeSchedule.txt","r") as f:
-			# Schedule format in file:        YYYY - MM - DD - TT:TT AM  
-			""" NOTE: The variable 'timeZone' is the timezone of the dates in this file.
+			"""  Schedule format in file:        YYYY - MM - DD - TT:TT AM  
+			NOTE: The variable 'timeZone' is the timezone of the dates in this file.
 			        Change variable if needed and keep dates in the file on the same timezone."""
 			f.readline() # This is so it ignores the first line of the file which reminds about the format
 			temp = f.readlines()
@@ -66,7 +66,7 @@ def updateSidebar(subreddit,sleepTime):
 			hours = int((delta.seconds - delta.seconds%3600)/3600)
 			minutes = int((delta.seconds%3600)/60)
 
-			"""What follows is logic to display the countdown in a simple very readable way. 
+			"""What follows is logic to display the countdown in a very readable way. 
 				It is equivalent, but displays a better message that this 1 line of code:
 			countdown = "**{0}** day{1}, **{2}** hour{3} and **{4}** minute{5}".format(delta.days, "s"*(delta.days != 1), hours, "s"*(hours != 1),  minutes, "s"*(minutes != 1))
 				"""
