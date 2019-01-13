@@ -55,6 +55,155 @@
           "D"
         ]
       ]
+    },
+    "Shirt Rule": {
+      "reward": 4,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": null,
+      "termlist": [
+        "shirt",
+        "bench",
+        "ashole",
+        "ashhole",
+        "shirtballs",
+        "meathole",
+        "dink",
+        "chunksters",
+        "fork",
+        "holy motherforking shirtballs",
+        "holy motherforking shirt balls"
+      ]
+    },
+    "Courtesies": {
+      "reward": 3,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": null,
+      "termlist": [
+        " thanks ",
+        "thank you",
+        " you're welcome ",
+        " you are welcome ",
+        "welcome!"
+      ]
+    },
+    "Curse Rule": {
+      "reward": -8,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": null,
+      "termlist": [
+        "shit",
+        "bitch",
+        " asshole ",
+        " dick",
+        "fuck"
+      ]
+    },
+    "Strong Curses": {
+      "reward": -35,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": null,
+      "termlist": [
+        " cunt ",
+        " retard ",
+        " retarted "
+      ]
+    },
+    "Slurs": {
+      "reward": -70,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": "A user made a comment or post with a slur.",
+      "termlist": [
+        "nigga",
+        "nigger"
+      ]
+    },
+    "Philosophers": {
+      "reward": 25,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": null,
+      "termlist": [
+        "kant",
+        "heidegger",
+        "lao tzu",
+        "heidegger",
+        "kierkegaard",
+        "sartre",
+        "aristotle",
+        "plato",
+        "locke",
+        "camus",
+        "nietzeche"
+      ]
+    },
+    "Book Mentions": {
+      "reward": 20,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": null,
+      "termlist": [
+        "what we owe to each other",
+        "the metaphysics of morals",
+        "on the way to language",
+        "a treatise of human nature",
+        "tao te ching",
+        "utilitarianism",
+        "the song of god",
+        "the methods of ethics",
+        "how good people make tough choices"
+      ]
+    },
+    "Filosophy": {
+      "reward": 20,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": null,
+      "termlist": [
+        "metaphysic",
+        "utilitarian",
+        "trolley problem",
+        "deontology",
+        "consequentialism",
+        "virtue ethics",
+        "nihilism"
+      ]
+    },
+    "Word of God": {
+      "reward": 1,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": null,
+      "termlist": [
+        " schur ",
+        "word of god"
+      ]
+    },
+    "hardRuleExample": {
+      "reward": 0,
+      "hardrule": true,
+      "reply": null,
+      "modnotice": null,
+      "termlist": [
+        "A",
+        "B"
+      ]
+    },
+    "Spoilers Tags": {
+      "reward": 25,
+      "hardrule": false,
+      "reply": null,
+      "modnotice": null,
+      "termlist": [
+        ">!",
+        "!<"
+      ]
+    },
+      ]
     }
   }
 }
