@@ -52,7 +52,7 @@ for submission in subreddit.search(query,limit=1):
 
 print("Parsing Flairs done")
 
-nonSpoilers = ["no spoiler", "s1e1", "s1 e1"]
+nonSpoilers = ["no spoiler", "s1e1 ", "s1 e1 "]
 s1List = ["s1", "s01", "season 1", "first season"]
 s2List = ["s2", "s02", "season 2", "second season"]
 s3List = ["s3", "s03", "season 3", "third season"]
@@ -94,18 +94,6 @@ while True:
 						f.write("Selecting Flair No-Spoilers to submission: {} Link: {}\n".format(submission.title,submission.permalink))
 						submission.flair.select(templ_id, 'No Spoilers')
 
-					elif "shirtpost" in titl:
-						templ_id = templates['shirtpost']["flair_template_id"]
-						print("Selecting Flair [Shirtpost] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
-						f.write("Selecting Flair [Shirtpost] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
-						submission.flair.select(templ_id, 'Shirtpost')
-
-					elif "meta" in titl:
-						templ_id = templates['meta']["flair_template_id"]
-						print("Selecting Flair [Meta] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
-						f.write("Selecting Flair [Meta] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
-						submission.flair.select(templ_id, 'Meta')
-
 					elif any((x in titl) for x in s1List):
 						templ_id = templates['s1']["flair_template_id"]
 						print("Selecting Flair [Season One] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
@@ -129,6 +117,18 @@ while True:
 						print("Selecting Flair [Season Four] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
 						f.write("Selecting Flair [Season Four] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
 						submission.flair.select(templ_id, 'Season Four')
+
+					elif "shirtpost" in titl:
+						templ_id = templates['shirtpost']["flair_template_id"]
+						print("Selecting Flair [Shirtpost] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
+						f.write("Selecting Flair [Shirtpost] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
+						submission.flair.select(templ_id, 'Shirtpost')
+
+					elif "meta" in titl:
+						templ_id = templates['meta']["flair_template_id"]
+						print("Selecting Flair [Meta] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
+						f.write("Selecting Flair [Meta] to submission: {} Link: {}\n".format(submission.title,submission.permalink))
+						submission.flair.select(templ_id, 'Meta')
 
 					else:
 						counter -= 1
